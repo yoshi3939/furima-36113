@@ -11,7 +11,7 @@ RSpec.describe Item, type: :model do
         expect(@item).to be_valid
       end
       it 'priceの値が300~9999999の間で、半角数値であれば登録できる' do
-        @item.price = '5000'
+        @item.price = 5000
         expect(@item).to be_valid
       end
     end
@@ -28,37 +28,43 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
       it 'categoryが空だと登録できない' do
-        @item.category_id = ''
+        @item.category_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'item_statusが空だと登録できない' do
-        @item.item_status_id = ''
+        @item.item_status_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Item status can't be blank")
       end
       it 'delivery_chargeが空だと登録できない' do
-        @item.delivery_charge_id = ''
+        @item.delivery_charge_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
       end
       it 'prefectureが空だと登録できない' do
-        @item.prefecture_id = ''
+        @item.prefecture_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'delivery_daysが空だと登録できない' do
-        @item.delivery_days_id = ''
+        @item.delivery_days_id = 0
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery days can't be blank")
       end
+      it 'priceが空だと登録できない' do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is invalid. Input half-width characters.',
+                                                      'Price is out of setting range')
+      end
       it 'priceが300未満だと登録できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
       it 'priceが9999999より大きいと登録できない' do
-        @item.price = '10000000'
+        @item.price = 10_000_000
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
@@ -66,6 +72,11 @@ RSpec.describe Item, type: :model do
         @item.price = '５００'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is out of setting range')
+      end
+      it 'ユーザー情報がない場合は登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
