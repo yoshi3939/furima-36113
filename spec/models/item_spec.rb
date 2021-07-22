@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-  end 
+  end
 
   describe '商品出品機能' do
     context '商品情報がデータベースへ保存されるとき' do
@@ -21,17 +21,17 @@ RSpec.describe Item, type: :model do
         @item.name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Name can't be blank")
-      end 
+      end
       it 'descriptionが空だと登録できない' do
         @item.description = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Description can't be blank")
-      end 
+      end
       it 'categoryが空だと登録できない' do
         @item.category_id = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
-      end 
+      end
       it 'item_statusが空だと登録できない' do
         @item.item_status_id = ''
         @item.valid?
@@ -55,24 +55,18 @@ RSpec.describe Item, type: :model do
       it 'priceが300未満だと登録できない' do
         @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
       it 'priceが9999999より大きいと登録できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
       it 'priceが全角数字だと登録できない' do
         @item.price = '５００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is out of setting range")
+        expect(@item.errors.full_messages).to include('Price is out of setting range')
       end
-
-
-
-
-
-
-    end 
+    end
   end
 end
