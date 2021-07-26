@@ -27,27 +27,28 @@ RSpec.describe RecordDeliveryAddress, type: :model do
       it 'postal_codeが空だと登録できない' do
         @record_delivery_address.postal_code = ''
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Postal code can't be blank", "Postal code Input correctly")
+        expect(@record_delivery_address.errors.full_messages).to include("Postal code can't be blank",
+                                                                         'Postal code Input correctly')
       end
       it 'postal_codeにハイフンがないと登録できない' do
         @record_delivery_address.postal_code = '1111111'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Postal code Input correctly")
+        expect(@record_delivery_address.errors.full_messages).to include('Postal code Input correctly')
       end
       it 'postal_codeが全角文字だと登録できない' do
         @record_delivery_address.postal_code = '１１１-１１１１'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Postal code Input correctly")
+        expect(@record_delivery_address.errors.full_messages).to include('Postal code Input correctly')
       end
       it 'postal_codeが「3桁ハイフン3桁」であると登録できない' do
         @record_delivery_address.postal_code = '111-111'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Postal code Input correctly")
+        expect(@record_delivery_address.errors.full_messages).to include('Postal code Input correctly')
       end
       it 'prefectureが空だと登録できない' do
         @record_delivery_address.prefecture_id = 0
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Prefecture Select")
+        expect(@record_delivery_address.errors.full_messages).to include('Prefecture Select')
       end
       it 'cityが空だと登録できない' do
         @record_delivery_address.city = ''
@@ -62,22 +63,23 @@ RSpec.describe RecordDeliveryAddress, type: :model do
       it 'phone_numberが空だと登録できない' do
         @record_delivery_address.phone_number = ''
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Phone number can't be blank", "Phone number Input only number")
+        expect(@record_delivery_address.errors.full_messages).to include("Phone number can't be blank",
+                                                                         'Phone number Input only number')
       end
       it 'phone_numberにハイフンがあると登録できない' do
         @record_delivery_address.phone_number = '090-1234-5678'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Phone number Input only number")
+        expect(@record_delivery_address.errors.full_messages).to include('Phone number Input only number')
       end
       it 'phone_numberが9桁であると登録できない' do
         @record_delivery_address.phone_number = '090123456'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Phone number Input only number")
+        expect(@record_delivery_address.errors.full_messages).to include('Phone number Input only number')
       end
       it 'phone_numberが12桁であると登録できない' do
         @record_delivery_address.phone_number = '090123456789'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Phone number Input only number")
+        expect(@record_delivery_address.errors.full_messages).to include('Phone number Input only number')
       end
       it 'ユーザー情報がない場合は登録できない' do
         @record_delivery_address.user_id = nil
