@@ -31,7 +31,7 @@ class RecordsController < ApplicationController
   end
 
   def confirm_current_user
-    redirect_to root_path if (current_user.id != @item.user_id) || @item.record.present?
+    redirect_to root_path if (current_user.id == @item.user_id) || @item.record.present?
   end
 
   def pay_item
