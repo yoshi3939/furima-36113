@@ -21,7 +21,7 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record_delivery_address).permit(:user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :record_id).merge(
+    params.require(:record_delivery_address).permit(:postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number).merge(
       user_id: current_user.id, item_id: params[:item_id], token: params[:token]
     )
   end
