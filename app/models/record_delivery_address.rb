@@ -1,6 +1,6 @@
 class RecordDeliveryAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :record_id
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number, :building_name, :phone_number, :record_id, :token
   
   with_options presence: true do
     validates :user_id
@@ -10,6 +10,7 @@ class RecordDeliveryAddress
     validates :city
     validates :house_number
     validates :phone_number, format: {with: /\A\d{10,11}\z/, message: "Input only number"}
+    validates :token
   end
 
 

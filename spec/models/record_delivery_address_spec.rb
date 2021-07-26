@@ -10,7 +10,7 @@ RSpec.describe RecordDeliveryAddress, type: :model do
 
   describe '商品購入機能' do
     context '商品購入情報がデータベースへ保存されるとき' do
-      it 'postal_code, prefecture_id, city, house_number, building_name, phone_number, record_idが存在すれば登録できる' do
+      it 'postal_code, prefecture_id, city, house_number, building_name, phone_number, record_id,tokenが存在すれば登録できる' do
         expect(@record_delivery_address).to be_valid
       end
       it 'postal_codeの値が「3桁ハイフン4桁」の半角文字列であれば登録できる' do
@@ -89,8 +89,11 @@ RSpec.describe RecordDeliveryAddress, type: :model do
         @record_delivery_address.valid?
         expect(@record_delivery_address.errors.full_messages).to include("Item can't be blank")
       end
-
-      
+      it 'tokenが空だと登録できない' do
+        @record_delivery_address.token = nil
+        @record_delivery_address.valid?
+        expect(@record_delivery_address.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
