@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :confirm_current_user, only: [:edit, :update, :destroy]
-  before_action :sold_out, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -52,10 +51,8 @@ class ItemsController < ApplicationController
   end
 
   def confirm_current_user
-    redirect_to root_path unless current_user.id == @item.user_id
-  end
-
-  def sold_out
-    redirect_to root_path if @item.record.present?
+    if current_user.id == @item.user_id or @item.record.present?
+      redirect_to root_path
+    end
   end
 end

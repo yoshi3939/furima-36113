@@ -2,7 +2,6 @@ class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
   before_action :confirm_current_user, only: [:index, :create]
-  before_action :sold_out, only: [:index, :create]
 
   def index
     @record_delivery_address = RecordDeliveryAddress.new
@@ -32,7 +31,9 @@ class RecordsController < ApplicationController
   end
 
   def confirm_current_user
-    redirect_to root_path if current_user.id == @item.user_id
+    if current_user.id == @item.user_id or @item.record.present?
+      redirect_to root_path
+    end
   end
 
   def pay_item
@@ -42,9 +43,5 @@ class RecordsController < ApplicationController
       card: record_params[:token],
       currency: 'jpy'
     )
-  end
-
-  def sold_out
-    redirect_to root_path if @item.record.present?
   end
 end
