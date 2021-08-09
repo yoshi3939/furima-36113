@@ -31,72 +31,72 @@ RSpec.describe RecordDeliveryAddress, type: :model do
       it 'postal_codeが空だと登録できない' do
         @record_delivery_address.postal_code = ''
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Postal code can't be blank")
+        expect(@record_delivery_address.errors.full_messages).to include("郵便番号を入力してください")
       end
       it 'postal_codeにハイフンがないと登録できない' do
         @record_delivery_address.postal_code = '1111111'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include('Postal code Input correctly')
+        expect(@record_delivery_address.errors.full_messages).to include('郵便番号はハイフンを入れて正しく入力してください')
       end
       it 'postal_codeが全角文字だと登録できない' do
         @record_delivery_address.postal_code = '１１１-１１１１'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include('Postal code Input correctly')
+        expect(@record_delivery_address.errors.full_messages).to include('郵便番号はハイフンを入れて正しく入力してください')
       end
       it 'postal_codeが「3桁ハイフン3桁」であると登録できない' do
         @record_delivery_address.postal_code = '111-111'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include('Postal code Input correctly')
+        expect(@record_delivery_address.errors.full_messages).to include('郵便番号はハイフンを入れて正しく入力してください')
       end
       it 'prefectureが空だと登録できない' do
         @record_delivery_address.prefecture_id = 0
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include('Prefecture Select')
+        expect(@record_delivery_address.errors.full_messages).to include('都道府県を選択してください')
       end
       it 'cityが空だと登録できない' do
         @record_delivery_address.city = ''
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("City can't be blank")
+        expect(@record_delivery_address.errors.full_messages).to include("市区町村を入力してください")
       end
       it 'house_numberが空だと登録できない' do
         @record_delivery_address.house_number = ''
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("House number can't be blank")
+        expect(@record_delivery_address.errors.full_messages).to include("番地を入力してください")
       end
       it 'phone_numberが空だと登録できない' do
         @record_delivery_address.phone_number = ''
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Phone number can't be blank")
+        expect(@record_delivery_address.errors.full_messages).to include("電話番号を入力してください")
       end
       it 'phone_numberにハイフンがあると登録できない' do
         @record_delivery_address.phone_number = '090-1234-5678'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include('Phone number Input only number')
+        expect(@record_delivery_address.errors.full_messages).to include('電話番号は数字のみ入力してください')
       end
       it 'phone_numberが9桁であると登録できない' do
         @record_delivery_address.phone_number = '090123456'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include('Phone number Input only number')
+        expect(@record_delivery_address.errors.full_messages).to include('電話番号は数字のみ入力してください')
       end
       it 'phone_numberが12桁であると登録できない' do
         @record_delivery_address.phone_number = '090123456789'
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include('Phone number Input only number')
+        expect(@record_delivery_address.errors.full_messages).to include('電話番号は数字のみ入力してください')
       end
       it 'ユーザー情報がない場合は登録できない' do
         @record_delivery_address.user_id = nil
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("User can't be blank")
+        expect(@record_delivery_address.errors.full_messages).to include("Userを入力してください")
       end
       it '商品情報がない場合は登録できない' do
         @record_delivery_address.item_id = nil
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Item can't be blank")
+        expect(@record_delivery_address.errors.full_messages).to include("Itemを入力してください")
       end
       it 'tokenが空だと登録できない' do
         @record_delivery_address.token = nil
         @record_delivery_address.valid?
-        expect(@record_delivery_address.errors.full_messages).to include("Token can't be blank")
+        expect(@record_delivery_address.errors.full_messages).to include("クレジットカード情報を入力してください")
       end
     end
   end
