@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :confirm_current_user, only: [:edit, :update, :destroy]
 
   def index
-    @items = Item.all.order('created_at DESC')
+    @items = Item.includes(:user, :record).order('created_at DESC')
   end
 
   def new
